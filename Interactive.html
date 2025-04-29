@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>¡Practica la Multiplicación!</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to right, #ffe29f, #ffa99f);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+    }
+    .card {
+      background-color: #fffbe6;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      padding: 30px;
+      text-align: center;
+      width: 300px;
+      position: relative;
+    }
+    h1 {
+      font-size: 1.8em;
+      color: #d17a00;
+    }
+    .question {
+      font-size: 1.5em;
+      margin: 20px 0;
+    }
+    input {
+      padding: 10px;
+      font-size: 1.2em;
+      width: 60px;
+      text-align: center;
+      border-radius: 10px;
+      border: 2px solid #ffd54f;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #ffd54f;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 5px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ffca28;
+    }
+    .feedback {
+      margin-top: 15px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .character {
+      font-size: 3em;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>¡Multiplica con Animalitos!</h1>
+    <div class="character" id="character">🦁</div>
+    <div class="question" id="question">¿Cuánto es 2 × 3?</div>
+    <input type="number" id="answer" />
+    <div>
+      <button onclick="checkAnswer()">¡Responder!</button>
+      <button onclick="newQuestion()">Otra vez</button>
+    </div>
+    <div class="feedback" id="feedback"></div>
+  </div>
+
+  <script>
+    const characters = ['🐶','🦁','🐵','🐼','🦊','🐸','🐯','🐮','🐷','🐔'];
+    let num1, num2;
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function newQuestion() {
+      num1 = getRandomInt(1, 10);
+      num2 = getRandomInt(1, 10);
+      document.getElementById('question').textContent = `¿Cuánto es ${num1} × ${num2}?`;
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('answer').value = '';
+      const randomChar = characters[getRandomInt(0, characters.length - 1)];
+      document.getElementById('character').textContent = randomChar;
+    }
+
+    function checkAnswer() {
+      const userAnswer = parseInt(document.getElementById('answer').value);
+      const feedback = document.getElementById('feedback');
+      if (userAnswer === num1 * num2) {
+        feedback.textContent = '¡Correcto! 🎉';
+        feedback.style.color = 'green';
+      } else {
+        feedback.textContent = `¡Ups! La respuesta es ${num1 * num2} 😅`;
+        feedback.style.color = 'red';
+      }
+    }
+
+    // Cargar primera pregunta al iniciar
+    newQuestion();
+  </script>
+</body>
+</html>
